@@ -37,25 +37,22 @@ if st.sidebar.checkbox("Lihat EDA dulu !"):
     st.write(df.describe())
 
 
-# Filter Order Date
+# Sidebar untuk filter tanggal
 st.sidebar.header("Filter")
+startDate = df['Order Date'].min()
+endDate = df['Order Date'].max()
 date1 = pd.to_datetime(st.sidebar.date_input(":date: Tanggal awal", startDate))
 date2 = pd.to_datetime(st.sidebar.date_input(":date: Tanggal Akhir", endDate))
+
+# Filter data berdasarkan rentang tanggal yang dipilih
+df_filtered = df[(df["Order Date"] >= date1) & (df["Order Date"] <= date2)].copy()
 
 # Hitung jumlah hari antara dua tanggal yang dipilih
 days_diff = (date2 - date1).days
 
-# Slider
-distance_min = 0
-distance_max = days_diff
-distance_values = st.sidebar.slider("Rentang Waktu", 0, days_diff, (0, days_diff), key="distance_input")
-
-# Hitung tanggal berdasarkan slider
-start_date = date1 + pd.Timedelta(days=distance_values[0])
-end_date = date1 + pd.Timedelta(days=distance_values[1])
-
-# Agar data update setiap kita pilih tanggal
-df = df[(df["Order Date"] >= date1) & (df["Order Date"] <= date2)].copy()
+# Tampilkan output setiap kali rentang tanggal berubah
+st.write(f"Rentang waktu yang dipilih: {date1} sampai {date2}")
+st.write(f"Jumlah hari antara dua tanggal yang dipilih: {days_diff} hari")
 
 # Filter negara
 country = st.sidebar.multiselect(":world_map: Negara", df["Customer Country"].unique())
