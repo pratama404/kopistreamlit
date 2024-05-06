@@ -13,7 +13,7 @@ st.markdown(
 )
 
 # Load the data
-df = pd.read_excel('saleskopi.xlsx')
+df = pd.read_excel('https://github.com/pratama404/kopistreamlit/raw/main/saleskopi.xlsx')
 
 
 
