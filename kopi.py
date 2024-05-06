@@ -30,7 +30,7 @@ st.sidebar.markdown(
     "**[Ageng Putra Pratama](https://lynk.id/agengputrapratama)**")
 st.sidebar.info("Dashboard ini menampilkan visualisasi untuk sekumpulan data Penjualan Kopi ☕. "
                 "Dataset ini berisi infomasi hasil penjualan kopi dari tahun 2019- 2022 di beberapa kota di tiap negara dengan tipe dan jenis kopi masing masing.")
-st.sidebar.markdown("[Download Dataset](https://link-to-your-dataset)")
+st.sidebar.markdown("[Download Dataset](https://github.com/pratama404/kopistreamlit/raw/main/saleskopi.xlsx)")
 
 if st.sidebar.checkbox("Lihat EDA dulu !"):
     st.subheader("Exploratory data analysis")
@@ -39,8 +39,8 @@ if st.sidebar.checkbox("Lihat EDA dulu !"):
 
 # Filter Order Date
 st.sidebar.header("Filter")
-date1 = pd.to_datetime(st.sidebar.date_input(":date: Start Date", startDate))
-date2 = pd.to_datetime(st.sidebar.date_input(":date: End Date", endDate))
+date1 = pd.to_datetime(st.sidebar.date_input(":date: Tanggal awal", startDate))
+date2 = pd.to_datetime(st.sidebar.date_input(":date: Tanggal Akhir", endDate))
 
 # Hitung jumlah hari antara dua tanggal yang dipilih
 days_diff = (date2 - date1).days
@@ -73,7 +73,7 @@ else:
 
 # Filter Loyalty Card
 card = st.sidebar.multiselect(
-    ":credit_card: Kepemilikan Loyalti Card",
+    ":credit_card: Loyalti Card",
     df_filtered["Customer Loyalty Card"].unique(),
 )
 if not card:
@@ -83,7 +83,7 @@ else:
 
 # Filter jenis kopi
 coffee_type = st.sidebar.multiselect(
-    ":coffee: Jenis Kopi", df_filtered["Product Coffee Type"].unique()
+    ":coffee: Tipe Kopi", df_filtered["Product Coffee Type"].unique()
 )
 if not coffee_type:
     df_filtered = df_filtered.copy()
@@ -92,7 +92,7 @@ else:
 
 # Filter jenis sangrai
 roast_type = st.sidebar.multiselect(
-    ":fire: Jenis Sangrai", df_filtered["Product Roast Type"].unique()
+    ":fire: Tipe Sangrai", df_filtered["Product Roast Type"].unique()
 )
 if not roast_type:
     df_filtered = df_filtered.copy()
@@ -101,7 +101,7 @@ else:
 
 # Filter ukuran
 size = st.sidebar.multiselect(
-    ":cup_with_straw: Ukuran Kemasan", df_filtered["Product Size (kg)"].unique()
+    ":cup_with_straw: Tipe Ukuran", df_filtered["Product Size (kg)"].unique()
 )
 if not size:
     df_filtered = df_filtered.copy()
